@@ -17,7 +17,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.Vector;
@@ -41,20 +43,42 @@ public class myFetchService extends IntentService
     {
         getData("n2");
         getData("p2");
-
         return;
+    }
+
+    public String getStartingDate(){
+        Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        cal.add(Calendar.DATE, -2);
+        String startingDate= dateFormat.format(cal.getTime());
+        //Log.v("startingdate",startingDate+"");
+        return startingDate;
+    }
+
+    public String getEndDate(){
+        Calendar cal = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        cal.add(Calendar.DATE, +2);
+        String endDate= dateFormat.format(cal.getTime());
+        //Log.v("enddate",endDate+"");
+        return endDate;
     }
 
     private void getData (String timeFrame)
     {
         //Creating fetch URL
         final String BASE_URL = "http://api.football-data.org/alpha/fixtures"; //Base URL
-        final String QUERY_TIME_FRAME = "timeFrame"; //Time Frame parameter to determine days
+        //final String QUERY_TIME_FRAME = "timeFrame"; //Time Frame parameter to determine days
+        final String QUERY_START_DATE ="timeFrameStart";
+        final String QUERY_END_DATE= "timeFrameEnd";
         //final String QUERY_MATCH_DAY = "matchday";
 
+
         Uri fetch_build = Uri.parse(BASE_URL).buildUpon().
-                appendQueryParameter(QUERY_TIME_FRAME, timeFrame).build();
-        //Log.v(LOG_TAG, "The url we are looking at is: "+fetch_build.toString()); //log spam
+                //appendQueryParameter(QUERY_TIME_FRAME, timeFrame)
+                appendQueryParameter(QUERY_START_DATE, getStartingDate().toString())
+        .appendQueryParameter(QUERY_END_DATE, getEndDate().toString()).build();
+        Log.v(LOG_TAG, "The url we are looking at is: "+fetch_build.toString()); //log spam
         HttpURLConnection m_connection = null;
         BufferedReader reader = null;
         String JSON_data = null;
@@ -118,8 +142,6 @@ public class myFetchService extends IntentService
                     processJSONdata(getString(R.string.dummy_data), getApplicationContext(), false);
                     return;
                 }
-
-
                 processJSONdata(JSON_data, getApplicationContext(), true);
             } else {
                 //Could not Connect

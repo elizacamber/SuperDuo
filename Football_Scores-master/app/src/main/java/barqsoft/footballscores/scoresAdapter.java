@@ -25,7 +25,6 @@ public class scoresAdapter extends CursorAdapter
     public static final int COL_ID = 8;
     public static final int COL_MATCHTIME = 2;
     public double detail_match_id = 0;
-    private String FOOTBALL_SCORES_HASHTAG = "#Football_Scores";
     public scoresAdapter(Context context,Cursor cursor,int flags)
     {
         super(context,cursor,flags);
@@ -93,7 +92,7 @@ public class scoresAdapter extends CursorAdapter
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + FOOTBALL_SCORES_HASHTAG);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, ShareText + (R.string.FOOTBALL_SCORES_HASHTAG));
         return shareIntent;
     }
 
