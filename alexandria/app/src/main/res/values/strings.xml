@@ -17,6 +17,7 @@
     <string name="ok_button">Next</string>
     <string name="cancel_button">Cancel</string>
     <string name="not_found">No Book found</string>
+    <string name="unknown_author">Unknown Author</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
     <string name="pref_startScreen">Select Startscreen</string>
@@ -31,7 +32,7 @@
     <string name="alert_title">No Internet Connection</string>
     <string name="alert_message">Your device is not connected to the Internet</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+
     <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there. </string>
 
     <string name="no_network_error">No network available.</string>
