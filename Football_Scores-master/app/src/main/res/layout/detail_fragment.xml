@@ -36,11 +36,11 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/share_text"
+        android:contentDescription="@string/share_text"
         android:id="@+id/share_button"
-        android:drawableStart="@android:drawable/ic_menu_share"
-        android:paddingStart="120dp"
-        android:paddingEnd="120dp"
-            tools:targetApi="jelly_bean_mr1" />
+        android:drawableLeft="@android:drawable/ic_menu_share"
+        android:paddingRight="120dp"
+        android:paddingLeft="120dp" />
     </FrameLayout>
 
 </LinearLayout>
